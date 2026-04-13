@@ -38,6 +38,127 @@
         @media (max-width: 640px) { .sidebar-panel { border-radius: 0; } }
 
 
+    
+
+        body.menu-open {
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .sidebar-transition {
+            transition: transform 0.35s ease;
+        }
+
+        .mobile-sidebar {
+            background: #101113;
+            color: #f5f5f5;
+            border-right: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 18px 16px 10px;
+            min-height: 72px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .sidebar-close {
+            width: 56px;
+            height: 56px;
+            border: 0;
+            border-radius: 0;
+            background: rgba(255,255,255,0.08);
+            color: #d1d5db;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-menu {
+            padding: 0;
+        }
+
+        .sidebar-main-link {
+            display: block;
+            padding: 20px 28px;
+            background: rgba(255,255,255,0.12);
+            color: #f3f4f6;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .sidebar-group {
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .sidebar-group summary {
+            list-style: none;
+            cursor: pointer;
+            position: relative;
+            padding: 18px 48px 14px 40px;
+            color: #d1d5db;
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .sidebar-group summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .sidebar-group summary::before {
+            content: '⌄';
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-56%);
+            font-size: 20px;
+            color: #d1d5db;
+        }
+
+        .sidebar-group:not([open]) summary::before {
+            transform: translateY(-56%) rotate(-90deg);
+        }
+
+        .sidebar-submenu {
+            padding: 2px 0 14px;
+        }
+
+        .sidebar-submenu .sidebar-item {
+            display: block;
+            text-decoration: none;
+            color: #e5e7eb;
+            font-size: 17px;
+            line-height: 1.35;
+            padding: 12px 28px 12px 76px;
+            opacity: 0.95;
+        }
+
+        .sidebar-submenu .sidebar-item:hover,
+        .sidebar-main-link:hover {
+            background: rgba(255,255,255,0.06);
+        }
+
+        .sidebar-item.current-page {
+            color: #ffffff !important;
+            background: rgba(255,255,255,0.10);
+            font-weight: 700;
+        }
+
+        .dark-mode .mobile-sidebar {
+            background: #0f1012;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-sidebar {
+                width: 360px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -51,54 +172,54 @@
         </button>
     </nav>
 
-    <div id="sidebar" class="fixed inset-0 z-[90] translate-x-full sidebar-transition pointer-events-none">
-        <div id="overlay" class="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 transition-opacity duration-500"></div>
-        <div class="sidebar-panel absolute right-0 top-0 h-[100dvh] w-[90%] max-w-[380px] shadow-2xl p-5 sm:p-8 flex flex-col">
-            <div class="flex items-center justify-between gap-4 mb-4 mt-14 sm:mt-16 shrink-0">
-                <span class="text-[10px] font-bold uppercase tracking-[0.35em] text-amber-500">Тизме</span>
+    
+    <div id="sidebar" class="fixed inset-0 z-[90] --translate-x-full sidebar-transition pointer-events-none">
+        <div id="overlay" class="absolute inset-0 bg-black/45 opacity-0 transition-opacity duration-300"></div>
+
+        <aside class="mobile-sidebar absolute left-0 top-0 h-[100dvh] w-[86%] max-w-[380px] shadow-2xl flex flex-col">
+            <div class="sidebar-header">
+                <button id="closeSidebarBtn" class="sidebar-close" aria-label="Close sidebar">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <nav class="sidebar-scroll space-y-4 text-black">
-                <a href="index.html" class="nav-link sidebar-item block text-[20px] sm:text-2xl font-bold italic tracking-tighter text-gray-400 hover:text-black dark:hover:text-white">
-                    Башкы бет
-                </a>
-                <a href="work.html" class="nav-link sidebar-item block text-[20px] sm:text-2xl font-bold italic tracking-tighter text-gray-400 hover:text-black dark:hover:text-white">
-                    Эмгек ишмердүүлүгү
-                </a>
-                <a href="educated.html" class="nav-link sidebar-item block text-[20px] sm:text-2xl font-bold italic tracking-tighter text-gray-400 hover:text-black dark:hover:text-white">
-                    Билими
-                </a>
-                <a href="best.html" class="nav-link sidebar-item block text-[20px] sm:text-2xl font-bold italic tracking-tighter text-gray-400 hover:text-black dark:hover:text-white">
-                    Мыкты мугалим 2026
-                </a>
-                <a href="eduRules.html" class="nav-link sidebar-item block text-[20px] sm:text-2xl font-bold italic tracking-tighter text-gray-400 hover:text-black dark:hover:text-white">
-                    Билим берүү мыйзамдары жөнүндө
-                </a>
-                <a href="myfilosofia.html" class="nav-link sidebar-item block text-[20px] sm:text-2xl font-bold italic tracking-tighter text-gray-400 hover:text-black dark:hover:text-white">
-                    Менин педагогикалык философиям
-                </a>
-                <a href="syllabus.html" class="nav-link sidebar-item block text-[20px] sm:text-2xl font-bold italic tracking-tighter text-gray-400 hover:text-black dark:hover:text-white">
-                    Календарлык тематикалык пландар
-                </a>
-                <a href="lessonplans.html" class="nav-link sidebar-item block text-[20px] sm:text-2xl font-bold italic tracking-tighter text-gray-400 hover:text-black dark:hover:text-white">
-                    Сабактардын пландары
-                </a>
-                <a href="parents.html" class="nav-link sidebar-item block text-[20px] sm:text-2xl font-bold italic tracking-tighter text-gray-400 hover:text-black dark:hover:text-white">
-                    Ата-энелер менен иштөө
-                </a>
-                <a href="classmp.html" class="nav-link sidebar-item block text-[20px] sm:text-2xl font-bold italic tracking-tighter text-gray-400 hover:text-black dark:hover:text-white">
-                    Класстан сырткаркы иш чаралар
-                </a>
-                <a href="platforms.html" class="nav-link sidebar-item block text-[20px] sm:text-2xl font-bold italic tracking-tighter text-gray-400 hover:text-black dark:hover:text-white">
-                    Сабак өтүүдө колдонуп келген платформалар
-                </a>
-                <a href="bossai.html" class="nav-link sidebar-item block text-[20px] sm:text-2xl font-bold italic tracking-tighter text-gray-400 hover:text-black dark:hover:text-white">
-                    Жасалма интелектти башкарган мугалим
-                </a>
+
+            <nav class="sidebar-scroll sidebar-menu text-white pb-10">
+                <a href="index.html" class="sidebar-main-link sidebar-item">Башкы бет</a>
+
+                <details class="sidebar-group" open>
+                    <summary>Жалпы маалыматтар</summary>
+                    <div class="sidebar-submenu">
+                        <a href="work.html" class="sidebar-item">Эмгек ишмердүүлүгү</a>
+                        <a href="educated.html" class="sidebar-item">Билими</a>
+                        <a href="best.html" class="sidebar-item">&quot;Мыкты мугалим-2026&quot;</a>
+                        <a href="bestnewV.html" class="sidebar-item">Сыйлыктар жана сертификаттар</a>
+                    </div>
+                </details>
+
+                <details class="sidebar-group" open>
+                    <summary>Билим берүү жөнүндө</summary>
+                    <div class="sidebar-submenu">
+                        <a href="eduRules.html" class="sidebar-item">Билим берүү мыйзамдары жөнүндө</a>
+                        <a href="myfilosofia.html" class="sidebar-item">Менин педагогикалык философиям</a>
+                        <a href="syllabus.html" class="sidebar-item">Календарлык-тематикалык пландар</a>
+                    </div>
+                </details>
+
+                <details class="sidebar-group" open>
+                    <summary>Сабактардын пландары</summary>
+                    <div class="sidebar-submenu">
+                        <a href="lessonplans.html" class="sidebar-item">Сабактардын пландары</a>
+                        <a href="parents.html" class="sidebar-item">Ата-энелер менен иштөө</a>
+                        <a href="classmp.html" class="sidebar-item">Класстан сырткаркы иш-чаралар</a>
+                        <a href="platforms.html" class="sidebar-item">Мен сабак өтүүдө колдонуп келген платформалар</a>
+                        <a href="bossai.html" class="sidebar-item">Жасалма интеллекти башкарган мугалим</a>
+                    </div>
+                </details>
             </nav>
-        </div>
+        </aside>
     </div>
 
-    <main class="py-32 px-6 max-w-6xl mx-auto">
+<main class="py-32 px-6 max-w-6xl mx-auto">
         <header class="mb-24 reveal text-center">
             <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-indigo-500 block mb-4">Мыйзам жана билим берүү</span>
             <h1 class="text-4xl md:text-6xl font-bold italic tracking-tighter">Билим берүү мыйзамдары</h1>
@@ -125,17 +246,60 @@
             localStorage.setItem('portfolio-theme', newTheme);
             applyTheme(newTheme);
         });
+        
         const menuBtn = document.getElementById('menuBtn');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
+        const closeSidebarBtn = document.getElementById('closeSidebarBtn');
         const menuIcon = document.getElementById('menuIcon');
-        function openMenu() { sidebar.classList.remove('translate-x-full', 'pointer-events-none'); overlay.classList.remove('opacity-0'); overlay.classList.add('opacity-100'); menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times'); document.body.classList.add('menu-open'); }
-        function closeMenu() { sidebar.classList.add('translate-x-full'); overlay.classList.remove('opacity-100'); overlay.classList.add('opacity-0'); menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); document.body.classList.remove('menu-open'); setTimeout(() => { if (sidebar.classList.contains('translate-x-full')) sidebar.classList.add('pointer-events-none'); }, 600); }
-        menuBtn.addEventListener('click', () => sidebar.classList.contains('translate-x-full') ? openMenu() : closeMenu());
-        overlay.addEventListener('click', closeMenu);
-        document.querySelectorAll('.sidebar-item').forEach(link => link.addEventListener('click', closeMenu));
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        document.querySelectorAll('.sidebar-item').forEach(link => { if (link.getAttribute('href') === currentPage) { link.classList.add('current-page'); link.classList.remove('text-gray-400'); } });
+
+        if (menuBtn && sidebar && overlay && menuIcon) {
+            function openMenu() {
+                sidebar.classList.remove('-translate-x-full', 'pointer-events-none');
+                overlay.classList.remove('opacity-0');
+                overlay.classList.add('opacity-100');
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+                document.body.classList.add('menu-open');
+            }
+
+            function closeMenu() {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.remove('opacity-100');
+                overlay.classList.add('opacity-0');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+                document.body.classList.remove('menu-open');
+
+                setTimeout(() => {
+                    if (sidebar.classList.contains('-translate-x-full')) {
+                        sidebar.classList.add('pointer-events-none');
+                    }
+                }, 350);
+            }
+
+            function toggleMenu() {
+                const isClosed = sidebar.classList.contains('-translate-x-full');
+                if (isClosed) openMenu();
+                else closeMenu();
+            }
+
+            menuBtn.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', closeMenu);
+            if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeMenu);
+            document.querySelectorAll('.sidebar-item').forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.sidebar-item').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('current-page');
+                }
+            });
+        }
+
+
         const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
